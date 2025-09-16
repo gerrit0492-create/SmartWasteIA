@@ -1,14 +1,15 @@
-import sys, os
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-from utils.ai import advise_cost_reduction
-from utils.config import DATA_DIR, ASSETS_DIR
 from __future__ import annotations
 import streamlit as st
 import pandas as pd
+import sys, os
+
+# Voeg projectroot toe aan sys.path zodat utils altijd gevonden wordt
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
 from utils.ai import advise_cost_reduction
 from utils.config import DATA_DIR, ASSETS_DIR
 
-# Pagina-config
+# Pagina-instellingen
 st.set_page_config(page_title="AI Assist", page_icon="🤖", layout="wide")
 st.logo(str(ASSETS_DIR / "logo_cp.svg"))
 
@@ -24,15 +25,12 @@ except FileNotFoundError:
 # Check of er een API-key beschikbaar is
 api_key = None
 try:
-    import streamlit as st
     if "llm" in st.secrets and "api_key" in st.secrets["llm"]:
         api_key = st.secrets["llm"]["api_key"]
 except Exception:
     pass
 
-# UI
-st.write("Genereer kostenreductie-advies op basis van de huidige BOM en materiaaldata.")
-
+# UI met fallback voor ontbrekende API-key of BOM
 if api_key:
     if st.button("🔎 Genereer advies"):
         if len(bom) == 0:
