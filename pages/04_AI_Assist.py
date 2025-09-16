@@ -1,3 +1,7 @@
+import sys, os
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+from utils.ai import advise_cost_reduction
+from utils.config import DATA_DIR, ASSETS_DIR
 from __future__ import annotations
 import streamlit as st
 import pandas as pd
