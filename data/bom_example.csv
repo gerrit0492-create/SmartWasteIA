@@ -1,0 +1,6 @@
+item_code,description,qty,unit,material_code,material_qty,unit_price_eur,machine_code,process_time_min_machine,labor_grade,process_time_min_labor,length_mm,area_cm2,thickness_mm,markup_pct
+P-1001,Base plate laser cut,10,pcs,ST37-Sheet,0.0,0.0,LASER_4KW,2.5,WLDER_A,1.0,250,120.0,6.0,12
+P-1002,CNC turned shaft,5,pcs,C45-Round,0.0,0.0,CNC_LATHE_MED,12.0,MACH_B,3.0,80,0.0,0.0,10
+P-1003,Bent bracket,20,pcs,ST37-Sheet,0.0,0.0,BENDER_80T,1.5,ASM_OP,0.8,100,40.0,3.0,15
+P-1004,Welded assembly,2,pcs,DUplex-1.4462,0.0,0.0,WELD_MIG,35.0,WLDER_A,60.0,0,0.0,0.0,18
+P-1005,3D print fixture,1,pcs,PA12,0.55,45.0,AM_SLS,0.0,ASM_OP,10.0,0,0.0,0.0,20
