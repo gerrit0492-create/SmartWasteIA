@@ -1,3 +1,7 @@
+import sys, os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__),"..")))
+from utils.ia import advise_cost_reduction
+from utils.config import DATA_DIR, ASSETS_DIR
 from __future__ import annotations
 import streamlit as st
 import pandas as pd
