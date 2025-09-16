@@ -1,14 +1,10 @@
-import sys, os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__),"..")))
-from utils.ia import advise_cost_reduction
-from utils.config import DATA_DIR, ASSETS_DIR
 from __future__ import annotations
 import streamlit as st
 import pandas as pd
 import sys, os
 
 # Voeg projectroot toe aan sys.path zodat utils altijd gevonden wordt
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from utils.ai import advise_cost_reduction
 from utils.config import DATA_DIR, ASSETS_DIR
@@ -47,3 +43,4 @@ if api_key:
         st.caption("Klik op 'Genereer advies' om AI-ideeën te krijgen.")
 else:
     st.warning("Geen API-key gevonden. Voeg je OpenAI API-key toe in `.streamlit/secrets.toml` onder [llm].")
+
