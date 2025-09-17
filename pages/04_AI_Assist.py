@@ -18,7 +18,7 @@ except Exception:
 st.write("AI-advies over de huidige BOM:")
 
 # Hugging Face API-config met veilige token uit Streamlit Secrets
-HF_API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1"
+HF_API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2"
 HF_TOKEN = st.secrets["huggingface"]["token"] if "huggingface" in st.secrets else None
 HF_HEADERS = {"Authorization": f"Bearer {HF_TOKEN}"} if HF_TOKEN else {}
 
