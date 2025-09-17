@@ -9,7 +9,7 @@ def _get_llm_params():
         llm = st.secrets.get("llm", {})
         provider = llm.get("provider","openai")
         api_key = llm.get("api_key","")
-        model = llm.get("model","gpt-4o-mini")
+        model = llm.get("model","gpt-4o")
         return provider, api_key, model
     except Exception:
         return "openai", os.getenv("OPENAI_API_KEY",""), "gpt-4o-mini"
