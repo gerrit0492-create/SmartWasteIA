@@ -4,9 +4,9 @@ import pandas as pd
 import os
 import requests
 
-# Config
+# Configuratie
 st.set_page_config(page_title="AI Assist", page_icon="🤖", layout="wide")
-st.title("🤖 AI Assist — Kostenreductie & Routing Advies (Gratis AI + Slimme Fallback)")
+st.title("🤖 AI Assist — Kostenreductie & Routing Advies (Gratis AI + Werkende Modellen)")
 
 # BOM inladen
 DATA_DIR = "data"
@@ -17,11 +17,10 @@ except Exception:
 
 st.write("AI-advies over de huidige BOM:")
 
-# Nieuwe set modellen (gegarandeerd open source en gratis)
+# Werkende gratis modellen
 MODELS = [
-    "HuggingFaceH4/zephyr-7b-alpha",
-    "OpenAssistant/oasst-sft-1-pythia-12b",
-    "tiiuae/falcon-7b-instruct"
+    "google/flan-t5-large",
+    "bigscience/bloom-560m"
 ]
 
 # Token ophalen
