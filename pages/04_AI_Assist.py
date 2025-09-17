@@ -4,9 +4,9 @@ import pandas as pd
 import os
 import requests
 
-# Config
+# Configuratie
 st.set_page_config(page_title="AI Assist", page_icon="🤖", layout="wide")
-st.title("🤖 AI Assist — Kostenreductie & Routing Advies (Volledig Gratis)")
+st.title("🤖 AI Assist — Kostenreductie & Routing Advies (Gratis AI)")
 
 # BOM inladen
 DATA_DIR = "data"
@@ -17,39 +17,34 @@ except Exception:
 
 st.write("AI-advies over de huidige BOM:")
 
-# Gratis AI-endpoints
-HF_API_URL_PRIMARY = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1"
-HF_API_URL_SECONDARY = "https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-beta"
+# Hugging Face API-config met veilige token uit Streamlit Secrets
+HF_API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.1"
+HF_TOKEN = st.secrets["huggingface"]["token"] if "huggingface" in st.secrets else None
+HF_HEADERS = {"Authorization": f"Bearer {HF_TOKEN}"} if HF_TOKEN else {}
 
-# Demo-keys voor publieke modellen (niet beveiligd, alleen voor gratis tests)
-HEADERS = {"Authorization": "Bearer hf_uJePzYSCIK_fake_demo_key"}
-
-def query_huggingface(api_url, prompt):
+def get_hf_response(prompt: str):
+    """Vraag AI-advies op via Hugging Face."""
+    if not HF_TOKEN:
+        return "Geen Hugging Face token gevonden in Streamlit Secrets."
     payload = {
         "inputs": prompt,
         "parameters": {"max_new_tokens": 200, "temperature": 0.7}
     }
     try:
-        response = requests.post(api_url, headers=HEADERS, json=payload, timeout=30)
+        response = requests.post(HF_API_URL, headers=HF_HEADERS, json=payload, timeout=60)
         if response.status_code == 200:
             return response.json()[0]["generated_text"]
-        return None
-    except:
-        return None
+        else:
+            return f"Fout van Hugging Face: {response.status_code} - {response.text}"
+    except Exception as e:
+        return f"Verbindingsfout: {e}"
 
-# Knop voor AI advies
+# Knop voor AI-advies
 if st.button("💡 Genereer advies"):
     prompt = f"Geef kostenreductie-advies voor deze BOM:\n{bom.to_string(index=False)}"
+    ai_output = get_hf_response(prompt)
 
-    # 1: Probeer primaire gratis AI
-    ai_output = query_huggingface(HF_API_URL_PRIMARY, prompt)
-
-    # 2: Fallback naar secundaire gratis AI als eerste faalt
-    if ai_output is None:
-        ai_output = query_huggingface(HF_API_URL_SECONDARY, prompt)
-
-    # 3: Toon resultaat of foutmelding
     if ai_output:
         st.markdown(ai_output)
     else:
-        st.error("Geen gratis AI-respons beschikbaar. Probeer later opnieuw.")
+        st.error("Geen AI-respons ontvangen. Probeer het later opnieuw.")
