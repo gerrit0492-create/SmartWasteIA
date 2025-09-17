@@ -4,9 +4,9 @@ import pandas as pd
 import os
 import requests
 
-# Configuratie
+# Config
 st.set_page_config(page_title="AI Assist", page_icon="🤖", layout="wide")
-st.title("🤖 AI Assist — Kostenreductie & Routing Advies (Gratis AI + Fallback)")
+st.title("🤖 AI Assist — Kostenreductie & Routing Advies (Gratis AI + Slimme Fallback)")
 
 # BOM inladen
 DATA_DIR = "data"
@@ -17,14 +17,14 @@ except Exception:
 
 st.write("AI-advies over de huidige BOM:")
 
-# Modellen in volgorde van gebruik
+# Nieuwe set modellen (gegarandeerd open source en gratis)
 MODELS = [
-    "mistralai/Mistral-7B-Instruct-v0.2",
-    "tiiuae/falcon-7b-instruct",
-    "bigscience/bloomz-560m"
+    "HuggingFaceH4/zephyr-7b-alpha",
+    "OpenAssistant/oasst-sft-1-pythia-12b",
+    "tiiuae/falcon-7b-instruct"
 ]
 
-# Hugging Face Token ophalen
+# Token ophalen
 HF_TOKEN = st.secrets.get("huggingface", {}).get("token", None)
 if not HF_TOKEN:
     st.error("Geen Hugging Face token gevonden in Streamlit Secrets.")
@@ -33,7 +33,6 @@ if not HF_TOKEN:
 HEADERS = {"Authorization": f"Bearer {HF_TOKEN}"}
 
 def query_model(model_name: str, prompt: str):
-    """Vraag AI-advies op via Hugging Face."""
     api_url = f"https://api-inference.huggingface.co/models/{model_name}"
     payload = {"inputs": prompt, "parameters": {"max_new_tokens": 200, "temperature": 0.7}}
     try:
@@ -45,7 +44,7 @@ def query_model(model_name: str, prompt: str):
     except Exception as e:
         return None, f"Verbindingsfout met {model_name}: {e}"
 
-# Knop voor AI-advies
+# Knop voor advies
 if st.button("💡 Genereer advies"):
     prompt = f"Geef kostenreductie-advies voor deze BOM:\n{bom.to_string(index=False)}"
 
@@ -53,7 +52,6 @@ if st.button("💡 Genereer advies"):
     last_error = None
     used_model = None
 
-    # Probeer modellen in volgorde
     for model in MODELS:
         st.info(f"Probeer model: {model}")
         ai_output, error = query_model(model, prompt)
@@ -62,9 +60,9 @@ if st.button("💡 Genereer advies"):
             break
         last_error = error
 
-    # Resultaat tonen
     if ai_output:
         st.success(f"Antwoord van model: {used_model}")
         st.markdown(ai_output)
     else:
         st.error(f"Geen bruikbaar antwoord ontvangen. Laatste fout: {last_error}")
+
