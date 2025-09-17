@@ -1,47 +1,55 @@
-from __future__ import annotations
-import streamlit as st, pandas as pd, time
-from utils.config import DATA_DIR, ASSETS_DIR, get_secret
-from utils import calc
-from utils import sheets as gs
+import streamlit as st
+import pandas as pd
+import os
 
-st.set_page_config(page_title="BOM Upload", page_icon="📤", layout="wide")
-st.logo(str(ASSETS_DIR / "logo_cp.svg"))
-st.title("📤 BOM Upload & Live Sync")
+st.set_page_config(page_title="BOM Upload & Live Sync", page_icon="📦", layout="wide")
+st.title("📦 BOM Upload & Live Sync")
 
-tab1, tab2 = st.tabs(["Upload CSV", "Google Sheets Live"])
+DATA_DIR = "data"
+BOM_FILE = os.path.join(DATA_DIR, "bom_example.csv")
 
-with tab1:
-    st.write("Upload een CSV met minimaal: item_code, description, qty, unit, material_code, unit_price_eur (optioneel), machine_code, process_time_min_machine, labor_grade, process_time_min_labor, markup_pct.")
-    f = st.file_uploader("Kies CSV", type=["csv"])
-    if f:
-        df = pd.read_csv(f)
-        st.session_state["bom_df"] = df
-        st.success(f"Ingeladen {len(df)} rijen")
-        st.dataframe(df.head(200), use_container_width=True)
+# Kolommen die minimaal verwacht worden
+REQUIRED_COLUMNS = [
+    "item_code", "description", "qty", "unit", "material_code",
+    "unit_price_eur", "machine_code", "process_time_min_machine",
+    "machine_time_est_min", "machine_setup_min", "labor_grade", "markup_pct"
+]
 
-with tab2:
-    sid = st.text_input("Google Sheet ID", value=get_secret("sheets.bom_sheet_id",""))
-    ws = st.text_input("Worksheet (tab) naam, leeg = eerste", value="")
-    if st.button("🔄 Lees nu"):
-        try:
-            df = gs.read_sheet(sid, worksheet=ws or None)
-            st.session_state["bom_df"] = df
-            st.success(f"Ingeladen: {len(df)} rijen uit Google Sheets")
-            st.dataframe(df, use_container_width=True)
-        except Exception as e:
-            st.error(f"Kon sheet niet lezen: {e}")
+# Standaardwaarden voor ontbrekende kolommen
+DEFAULT_VALUES = {
+    "process_time_min_machine": 0,
+    "machine_time_est_min": 0,
+    "machine_setup_min": 0,
+    "markup_pct": 0,
+    "unit_price_eur": 0,
+    "qty": 1
+}
 
-st.divider()
+def load_bom(file_path):
+    try:
+        df = pd.read_csv(file_path, encoding="utf-8", sep=",")
+    except UnicodeDecodeError:
+        df = pd.read_csv(file_path, encoding="latin1", sep=",")  # fallback voor speciale tekens
 
-if "bom_df" in st.session_state:
-    mats = pd.read_csv(DATA_DIR / "materials.csv")
-    macs = pd.read_csv(DATA_DIR / "machines.csv")
-    lab = pd.read_csv(DATA_DIR / "labor.csv")
-    logi = pd.read_csv(DATA_DIR / "logistics.csv")
-    out = calc.compute_costs(st.session_state["bom_df"], mats, macs, lab, logi)
-    st.subheader("Resultaat")
-    st.dataframe(out, use_container_width=True)
-    st.download_button("⬇️ Exporteer resultaat (CSV)", data=out.to_csv(index=False).encode("utf-8"),
-                       file_name="bom_costed.csv", mime="text/csv")
+    # Ontbrekende kolommen toevoegen met defaultwaarden
+    for col in REQUIRED_COLUMNS:
+        if col not in df.columns:
+            df[col] = DEFAULT_VALUES.get(col, "")
+
+    return df[REQUIRED_COLUMNS]
+
+# Upload via Streamlit
+uploaded_file = st.file_uploader("Upload je BOM (CSV)", type=["csv"])
+
+if uploaded_file:
+    bom_df = load_bom(uploaded_file)
+    st.success("BOM succesvol ingeladen!")
+    st.dataframe(bom_df)
 else:
-    st.info("Nog geen BOM geladen.")
+    # Testbestand gebruiken als er geen upload is
+    if os.path.exists(BOM_FILE):
+        bom_df = load_bom(BOM_FILE)
+        st.info("Voorbeeld-BOM geladen (geen upload).")
+        st.dataframe(bom_df)
+    else:
+        st.warning("Nog geen BOM geladen. Upload een bestand of voeg bom_example.csv toe.")
