@@ -1,0 +1,16 @@
+material_code,description,category,density_kg_m3,eur_per_kg,source,last_update,waste_pct
+ST37-Sheet,Mild steel sheet S235,steel,7850,1.65,internal,2025-09-17,0.08
+S355-Plate,High strength steel S355,steel,7850,1.95,internal,2025-09-17,0.08
+C45-Round,Carbon steel C45 round,steel,7850,1.90,internal,2025-09-17,0.05
+1.4301-304,Stainless 304,steel,8000,3.20,outokumpu,2025-09-17,0.10
+1.4404-316L,Stainless 316L,steel,8000,4.20,outokumpu,2025-09-17,0.10
+1.4462-Duplex,Duplex 2205,steel,7800,3.80,outokumpu,2025-09-17,0.10
+AL-EN AW-6082,Aluminum 6082,aluminum,2700,4.10,internal,2025-09-17,0.07
+AL-EN AW-5083,Aluminum 5083,aluminum,2650,4.30,internal,2025-09-17,0.07
+CU-ETP,Copper ETP,copper,8960,8.90,internal,2025-09-17,0.05
+PA12,Polyamide 12 powder,polymer,1020,8.40,supplier,2025-09-17,0.02
+PA6-GF30,PA6 glass-filled 30%,polymer,1260,6.50,supplier,2025-09-17,0.03
+POM-C,Delrin/POM-C,polymer,1410,5.20,supplier,2025-09-17,0.03
+Ti-6Al-4V,Ti64 titanium,titanium,4430,35.00,supplier,2025-09-17,0.06
+ToolSteel-1.2379,D2 Tool steel,steel,7700,5.50,supplier,2025-09-17,0.05
+Cast-AlSi10Mg,Cast aluminum alloy,aluminum,2680,3.90,internal,2025-09-17,0.10

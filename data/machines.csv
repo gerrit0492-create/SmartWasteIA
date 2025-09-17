@@ -1,0 +1,15 @@
+machine_code,description,process,rate_eur_per_hour,setup_min,notes
+LASER_6KW,Fiber laser 6kW,laser_cut,85,12,cutting N2/O2
+WATERJET_4X2,Waterjet 4x2m,waterjet,95,20,abrasive incl
+PLASMA_HD,HD plasma,plasma,70,10,thick plate
+BENDER_160T,Press brake 160T,bending,65,20,offline prog incl
+ROLL_2M,Plate roll 2m,rolling,60,15,3-roll
+CNC_MILL_3AX,VMC 3-axis,milling,95,30,12k rpm
+CNC_MILL_5AX,5-axis mill,milling,130,40,trunion
+CNC_LATHE_Y,CNC lathe with Y,turning,110,25,bar feeder
+WELD_MIG,MIG welding,welding,58,8,wire+gas excl
+WELD_TIG,TIG welding,welding,62,10,argon excl
+AM_SLS,SLS printer,additive,125,45,PA12
+AM_DMLS,DMLS metal printer,additive,280,60,Ti64/SS
+COAT_POWDER,Powder coat,coating,70,25,per rack
+QA_CMM,CMM inspection,quality,80,10,report incl
