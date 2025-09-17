@@ -1,26 +1,27 @@
-from __future__ import annotations
 import streamlit as st
 import pandas as pd
-import os
 
-# Configuratie
+# Pagina-instellingen
 st.set_page_config(page_title="AI Assist", page_icon="🤖", layout="wide")
 st.title("🤖 AI Assist — Kostenreductie & Routing Advies (Testmodus)")
 
-# BOM inladen
-DATA_DIR = "data"
-try:
-    bom = pd.read_csv(os.path.join(DATA_DIR, "bom_example.csv"))
-except Exception:
-    bom = pd.DataFrame()
+# 1. Check of BOM in session_state aanwezig is
+if "bom_df" not in st.session_state or st.session_state["bom_df"].empty:
+    st.warning("⚠️ Geen BOM geladen. Ga eerst naar 'BOM Upload & Live Sync' om een BOM te uploaden.")
+    st.stop()
 
-st.write("AI-advies over de huidige BOM (nu zonder AI, alleen voor testen):")
+# 2. Toon altijd de actuele BOM
+st.success("✅ BOM succesvol ingeladen!")
+st.dataframe(st.session_state["bom_df"])
 
-# Knop voor testmodus
+# 3. AI-advies knop (nu alleen testmodus)
 if st.button("💡 Genereer advies"):
-    st.info("AI-functie staat uit in testmodus. Hier zou normaal het AI-antwoord komen.")
-    if bom.empty:
-        st.warning("BOM-bestand is leeg of niet gevonden.")
-    else:
-        st.success("BOM is succesvol ingeladen!")
-        st.dataframe(bom)
+    st.info("AI-functie staat nu in testmodus. Hier zou normaal het AI-antwoord komen.")
+    # Voorbeeld: simulatie van AI-advies
+    st.write("💡 **Simulatie-advies:** Overweeg materiaalreductie en procesoptimalisatie om kosten te verlagen.")
+
+# 4. Toekomst: hier kan AI integratie komen
+# ------------------------------------------------
+# Bijv. OpenAI of Hugging Face API aanroepen met:
+# - st.session_state["bom_df"] als input
+# - Resultaat tonen in Streamlit
