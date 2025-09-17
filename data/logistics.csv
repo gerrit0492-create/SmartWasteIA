@@ -1,3 +1,0 @@
-name,eur_flat,eur_per_kg,eur_per_km,default
-Standard freight,8.0,0.20,0.45,True
-Express freight,18.0,0.35,0.80,False

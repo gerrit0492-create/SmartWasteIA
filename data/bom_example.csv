@@ -1,9 +1,0 @@
-item_code,description,qty,unit,material_code,material_qty,unit_price_eur,machine_code,process_time_min_machine,labor_grade,process_time_min_labor,length_mm,area_cm2,thickness_mm,diameter_mm,markup_pct,notes
-P-1001,Base plate laser cut,25,pcs,ST37-Sheet,0.0,0.0,LASER_6KW,2.5,ASSEMBLY_OP,0.6,280,160.0,6.0,,12,laser + deburr
-P-1002,CNC milled block,5,pcs,AL-EN AW-6082,0.0,0.0,CNC_MILL_3AX,15.0,MACHINIST_B,3.0,80,0.0,0.0,,10,3-axis ops
-P-1003,Bent bracket,40,pcs,ST37-Sheet,0.0,0.0,BENDER_160T,1.8,ASSEMBLY_OP,0.9,120,45.0,3.0,,15,2 bends
-P-1004,Y-axis turned shaft,12,pcs,C45-Round,0.0,0.0,CNC_LATHE_Y,12.0,MACHINIST_A,2.5,120,0.0,0.0,25,10,turn + drill
-P-1005,MIG welded frame,3,pcs,ST37-Sheet,0.0,0.0,WELD_MIG,25.0,WELDER_A,70.0,0,0.0,0.0,,18,assembly weld
-P-1006,SLS printed jig,2,pcs,PA12,0.55,45.0,AM_SLS,0.0,ASSEMBLY_OP,12.0,0,0.0,0.0,,20,powder bed
-P-1007,TIG weld bracket 316L,6,pcs,1.4404-316L,0.0,0.0,WELD_TIG,20.0,WELDER_A,30.0,0,0.0,0.0,,15,decor weld
-P-1008,Powder coated set,25,pcs,ST37-Sheet,0.0,0.0,COAT_POWDER,0.0,PAINTER,4.0,0,0.0,0.0,,12,RAL9005
