@@ -1,8 +1,0 @@
-machine_code,description,process,rate_eur_per_hour,setup_min,notes
-LASER_4KW,Fiber laser 4kW,laser_cut,75,10,includes assist gas
-BENDER_80T,Press brake 80T,bending,60,15,tooling amortized
-CNC_LATHE_MED,CNC lathe medium,turning,85,20,2-axis
-CNC_MILL_3AX,CNC mill 3-axis,milling,90,30,with CAM
-WELD_MIG,MIG welding,welding,55,5,wire + gas separate
-AM_SLS,SLS 3D printer,additive,120,30,PA12
-PAINT_BOOTH,Powder coat,coating,65,20,per rack

@@ -1,6 +1,0 @@
-material_code,description,category,density_kg_m3,eur_per_kg,source,last_update
-ST37-Sheet,Mild steel sheet,steel,7850,1.60,internal,2025-09-16
-C45-Round,Carbon steel round,steel,7850,1.80,internal,2025-09-16
-DUplex-1.4462,Duplex stainless 1.4462,steel,7800,3.70,outokumpu,2025-09-16
-PA12,Nylon PA12 powder,polymer,1020,8.50,supplier,2025-09-16
-AL6061-Plate,Aluminum 6061 plate,aluminum,2700,4.20,internal,2025-09-16
