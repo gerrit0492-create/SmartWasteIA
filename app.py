@@ -1,51 +1,79 @@
 import streamlit as st
 import pandas as pd
-from utils.config import get_text, get_current_theme, APP_NAME, LOGO_PATH
+from utils.config import show_logo, get_text
 
-# Thema toepassen
-theme = get_current_theme()
-st.set_page_config(page_title=APP_NAME, page_icon="📦", layout="wide")
-
-# Custom CSS voor professioneel design
-st.markdown(
-    f"""
-    <style>
-        .stApp {{
-            background-color: {theme['background']};
-            color: {theme['text']};
-        }}
-        .big-title {{
-            font-size: 32px;
-            color: {theme['accent']};
-            font-weight: bold;
-        }}
-    </style>
-    """,
-    unsafe_allow_html=True
+# ------------------------------
+# Pagina configuratie
+# ------------------------------
+st.set_page_config(
+    page_title="BOM App v1.0",
+    page_icon="📦",
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
-# Header met logo en titel
-col1, col2 = st.columns([1, 4])
-with col1:
-    from utils.config import show_logo()
-with col2:
-    st.markdown(f"<div class='big-title'>{get_text('home_title')}</div>", unsafe_allow_html=True)
+# ------------------------------
+# Logo en titel
+# ------------------------------
+show_logo()
+st.title(get_text("home_title"))
 
 st.markdown("---")
 
-# Data inlezen
-try:
-    materials = pd.read_csv("data/materials.csv")
-    machines = pd.read_csv("data/machines.csv")
-    bom = pd.read_csv("data/bom_example.csv")
-except FileNotFoundError:
-    st.error("CSV-bestanden niet gevonden in de map 'data/'.")
-    materials, machines, bom = pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
+# ------------------------------
+# Data laden
+# ------------------------------
+def load_data():
+    try:
+        materials = pd.read_csv("data/materials.csv")
+    except:
+        materials = pd.DataFrame()
 
+    try:
+        machines = pd.read_csv("data/machines.csv")
+    except:
+        machines = pd.DataFrame()
+
+    try:
+        bom = pd.read_csv("data/bom_example.csv")
+    except:
+        bom = pd.DataFrame()
+
+    return materials, machines, bom
+
+
+materials, machines, bom = load_data()
+
+# ------------------------------
 # KPI's tonen
-if not materials.empty and not machines.empty and not bom.empty:
-    st.subheader("📊 Datastatistieken")
-    col1, col2, col3 = st.columns(3)
-    col1.metric(get_text("data_sources") + " - Materialen", len(materials))
-    col2.metric(get_text("data_sources") + " - Machines", len(machines))
-    col3.metric(get_text("data_sources") + " - BOM", len(bom))
+# ------------------------------
+col1, col2, col3 = st.columns(3)
+col1.metric("Materialen", len(materials))
+col2.metric("Machines", len(machines))
+col3.metric("BOM regels", len(bom))
+
+st.markdown("---")
+
+# ------------------------------
+# Data previews
+# ------------------------------
+st.subheader(get_text("data_sources"))
+
+with st.expander("Materialen bekijken"):
+    if not materials.empty:
+        st.dataframe(materials)
+    else:
+        st.info("Geen materialen gevonden.")
+
+with st.expander("Machines bekijken"):
+    if not machines.empty:
+        st.dataframe(machines)
+    else:
+        st.info("Geen machines gevonden.")
+
+with st.expander("BOM voorbeeld bekijken"):
+    if not bom.empty:
+        st.dataframe(bom)
+    else:
+        st.info("Geen BOM voorbeeld gevonden.")
+
