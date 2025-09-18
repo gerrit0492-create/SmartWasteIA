@@ -1,0 +1,31 @@
+Machine_Code,Description,Process_Type,Rate_EUR_hour,Setup_Time_min,Capacity_parts_hour
+CNC3AX,3-axis CNC milling,Milling,70,10,6
+CNC5AX,5-axis CNC milling,Milling,110,15,4
+LATHE_CNC,CNC Turning,Turning,65,8,10
+LASER4KW,Laser cutting 4kW,Cutting,60,5,20
+LASER6KW,Laser cutting 6kW,Cutting,75,5,25
+PLASMA_CUT,Plasma cutting,Cutting,55,5,15
+WATERJET,Waterjet cutting,Cutting,85,10,8
+BEND_CNC,CNC Bending,Bending,50,5,30
+ROLL_2M,Plate rolling 2m,Rolling,65,15,3
+ROLL_3M,Plate rolling 3m,Rolling,80,20,2
+WELD_MIG,MIG welding,Welding,50,5,8
+WELD_TIG,TIG welding,Welding,55,5,6
+WELD_ROBOT,Robot welding,Welding,65,8,10
+PAINT,Industrial painting,Coating,40,10,12
+POWDER,Powder coating,Coating,45,12,10
+ASSEMBLY,Assembly line,Assembly,35,5,15
+DRILL_AUTO,Automatic drilling,Drilling,45,5,25
+GRIND_AUTO,Automatic grinding,Finishing,50,8,20
+DEBURR,Deburring,Finishing,40,5,30
+ANODIZE,Anodizing,Coating,60,15,8
+HEAT_TREAT,Heat treatment,Heat,90,30,5
+SHOTBLAST,Shot blasting,Finishing,55,10,15
+PRESS_BRAKE,Press brake,Bending,50,5,25
+ROBOT_PICK,Robot handling,Automation,40,5,50
+PACKAGING,Packaging,Logistics,30,2,60
+CLEANING,Industrial cleaning,Cleaning,35,5,40
+INSPECTION,Dimensional inspection,Inspection,45,8,30
+3DPRINT_METAL,3D Printing Metal,Additive,120,15,2
+3DPRINT_PLASTIC,3D Printing Plastic,Additive,60,5,10
+CNC_GRINDER,CNC Surface Grinding,Grinding,80,12,4
