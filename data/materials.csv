@@ -1,0 +1,32 @@
+Material_Code,Description,Type,Density_kg_m3,Price_EUR_kg
+S235,Carbon steel S235,Steel,7850,0.85
+S275,Carbon steel S275,Steel,7850,0.90
+S355,Carbon steel S355,Steel,7850,0.95
+RVS304,Stainless steel 304,Stainless Steel,8000,1.75
+RVS316,Stainless steel 316,Stainless Steel,8000,2.10
+RVS_Duplex,Stainless steel Duplex 1.4462,Stainless Steel,7850,2.80
+Hardox400,Hardox 400 Wear Plate,Steel,7850,2.20
+Hardox500,Hardox 500 Wear Plate,Steel,7850,2.50
+AL1050,Aluminium 1050,Aluminium,2700,2.20
+AL5083,Aluminium 5083,Aluminium,2650,2.40
+AL5754,Aluminium 5754,Aluminium,2660,2.35
+AL6082,Aluminium 6082,Aluminium,2700,2.50
+AL7020,Aluminium 7020,Aluminium,2770,2.90
+AL7075,Aluminium 7075,Aluminium,2810,3.10
+CU_ETP,Copper ETP,Copper,8960,6.50
+CU_DEOX,Copper Deoxidized,Copper,8940,6.20
+BRASS_MS58,Brass MS58,Brass,8530,5.10
+BRONZE_RG7,Bronze RG7,Bronze,8600,5.90
+PA6,Polyamide 6,Polymer,1140,2.50
+PA12,Polyamide 12,Polymer,1040,2.70
+POM,Polyacetal (POM),Polymer,1410,2.80
+PTFE,PTFE Teflon,Polymer,2200,8.50
+PP,Polypropylene,Polymer,900,1.80
+PEHD,Polyethylene HD,Polymer,950,1.50
+PVC,Polyvinyl chloride,Polymer,1380,2.10
+ABS,ABS plastic,Polymer,1040,2.40
+PETG,PETG Plastic,Polymer,1270,2.60
+PC,Polycarbonate,Polymer,1210,3.10
+CFRP,Carbon Fiber Reinforced Polymer,Composite,1600,25.0
+GFRP,Glass Fiber Reinforced Polymer,Composite,1850,15.0
+Kevlar,Kevlar Fabric,Composite,1440,20.0
