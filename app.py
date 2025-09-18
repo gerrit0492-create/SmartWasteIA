@@ -27,7 +27,7 @@ st.markdown(
 # Header met logo en titel
 col1, col2 = st.columns([1, 4])
 with col1:
-    st.image(LOGO_PATH, width=80)
+    from utils.config import show_logo()
 with col2:
     st.markdown(f"<div class='big-title'>{get_text('home_title')}</div>", unsafe_allow_html=True)
 
