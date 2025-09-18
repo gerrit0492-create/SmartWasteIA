@@ -63,3 +63,25 @@ def get_current_theme() -> dict:
 # ------------------------------
 APP_NAME = "BOM App v1.0"
 LOGO_PATH = "data/logo.png"  # Plaats hier een logo als je wilt
+
+import base64
+import streamlit as st
+
+# Tekstlogo als fallback
+def get_logo_base64():
+    # Simpel tekstlogo
+    logo_text = "BOM App v1.0"
+    svg = f"""
+    <svg width="200" height="60" xmlns="http://www.w3.org/2000/svg">
+      <rect width="200" height="60" fill="#007BFF"/>
+      <text x="100" y="35" font-size="20" text-anchor="middle" fill="white">{logo_text}</text>
+    </svg>
+    """
+    return base64.b64encode(svg.encode("utf-8")).decode("utf-8")
+
+# Functie om het logo te tonen
+def show_logo():
+    logo_base64 = get_logo_base64()
+    logo_html = f'<img src="data:image/svg+xml;base64,{logo_base64}" width="200"/>'
+    st.markdown(logo_html, unsafe_allow_html=True)
+
